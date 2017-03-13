@@ -10,9 +10,11 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-
+    var ball = SKShapeNode()
+    
     override func didMove(to view: SKView) {
         createBackground()
+        makeBall()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -36,6 +38,29 @@ class GameScene: SKScene {
             let moveForever = SKAction.repeatForever(moveLoop)
             starsBackground.run(moveForever)
         }
+    }
+    
+    func makeBall() {
+        ball = SKShapeNode(circleOfRadius: 10)
+        ball.position = CGPoint(x: frame.midX, y: frame.midY)
+        ball.fillColor = UIColor.yellow
+        ball.name = "ball"
+        
+        //physics shape matches ball image
+        ball.physicsBody = SKPhysicsBody(circleOfRadius: 10)
+        //ignores forces and impulses
+        ball.physicsBody?.isDynamic = false
+        ball.physicsBody?.usesPreciseCollisionDetection = true
+        //no loss of energy via friction
+        ball.physicsBody?.friction = 0
+        //gravity is not a factor
+        ball.physicsBody?.affectedByGravity = false
+        //bounces fully off other objects
+        ball.physicsBody?.restitution = 1
+        //does not slow down over time
+        ball.physicsBody?.linearDamping = 0
+        ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
+        addChild(ball) //add ball to the view
     }
 
 }
