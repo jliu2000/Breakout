@@ -37,6 +37,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func createButton()
+    {
+        let button = SKSpriteNode(imageNamed: "startButton")
+        button.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(button)
+    }
+    
     func createBackground() {
         let stars = SKTexture(imageNamed: "stars")
         for i in 0...1 {
