@@ -13,35 +13,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ball = SKShapeNode()
     var paddle = SKSpriteNode()
     var brick = SKSpriteNode()
+    var button = SKSpriteNode()
     
     override func didMove(to view: SKView) {
-        createBackground()
-        makeBall()
-        makePaddle()
-        makeBrick()
-        makeLoseZone()
-        physicsWorld.contactDelegate = self
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        ball.physicsBody?.isDynamic = true
-        ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
+        button = SKSpriteNode(imageNamed: "startButton")
+        button.position = CGPoint(x: frame.midX, y: frame.midY)
+        button.name = "button"
+        addChild(button)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        for touch in touches
+        {
             let location = touch.location(in: self)
+            let node = self.nodes(at: location)
+            if (node[0].name == "button")
+            {
+                createBackground()
+                makeBall()
+                makePaddle()
+                makeBrick()
+                makeLoseZone()
+                physicsWorld.contactDelegate = self
+                self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+                ball.physicsBody?.isDynamic = true
+                ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
+                button.removeFromParent()
+            }
             paddle.position.x = location.x
         }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
-    
-    func createButton()
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     {
-        let button = SKSpriteNode(imageNamed: "startButton")
-        button.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(button)
+        
     }
     
     func createBackground() {
