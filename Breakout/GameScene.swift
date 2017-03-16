@@ -17,10 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bricks = [SKSpriteNode]()
     
     override func didMove(to view: SKView) {
-        button = SKSpriteNode(imageNamed: "startButton")
-        button.position = CGPoint(x: frame.midX, y: frame.midY)
-        button.name = "button"
-        addChild(button)
+        createButton()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -46,16 +43,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             paddle.position.x = location.x
         }
     }
+    func createButton()
+    {
+        button = SKSpriteNode(imageNamed: "startButton")
+        button.position = CGPoint(x: frame.midX, y: frame.midY)
+        button.name = "button"
+        addChild(button)
+    }
     
     func checkIfColliding()
     {
      //function to call constantly to check if the ball's position is currently at a brick's position.
-        for br in bricks
+        /*for br in bricks
         {
             //add if statement to check if the ball is colliding with any of the bricks.
             //if true, remove the brick(s) that are being collided with.
             checkIfColliding()
-        }
+        }*/
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
