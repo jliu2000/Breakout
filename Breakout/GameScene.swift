@@ -14,6 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var paddle = SKSpriteNode()
     var brick = SKSpriteNode()
     var button = SKSpriteNode()
+    var bricks = [SKSpriteNode]()
     
     override func didMove(to view: SKView) {
         button = SKSpriteNode(imageNamed: "startButton")
@@ -40,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ball.physicsBody?.isDynamic = true
                 ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
                 button.removeFromParent()
+                checkIfColliding()
             }
             paddle.position.x = location.x
         }
@@ -48,6 +50,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkIfColliding()
     {
      //function to call constantly to check if the ball's position is currently at a brick's position.
+        for br in bricks
+        {
+            //add if statement to check if the ball is colliding with any of the bricks.
+            //if true, remove the brick(s) that are being collided with.
+            checkIfColliding()
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -109,6 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
         brick.physicsBody?.isDynamic = false
         addChild(brick)
+        bricks.append(brick)
     }
     
     func makeLoseZone() {
