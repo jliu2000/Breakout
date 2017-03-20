@@ -16,6 +16,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var button = SKSpriteNode()
     var bricks = [SKSpriteNode]()
     
+    let BallCategory   : UInt32 = 0x1 << 0
+    let BottomCategory : UInt32 = 0x1 << 1
+    let BlockCategory  : UInt32 = 0x1 << 2
+    let PaddleCategory : UInt32 = 0x1 << 3
+    
     override func didMove(to view: SKView) {
         createButton()
     }
@@ -37,8 +42,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
                 ball.physicsBody?.isDynamic = true
                 ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 3))
+                ball.physicsBody?.categoryBitMask = BallCategory
                 button.removeFromParent()
-                checkIfColliding()
             }
             paddle.position.x = location.x
         }
@@ -51,8 +56,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(button)
     }
     
-    func checkIfColliding()
+    func checkIfColliding(contact: SKPhysicsContact)
     {
+        var body1 = SKPhysicsBody()
+        var body2 = SKPhysicsBody()
+        body1 = contact.bodyA
+        body2 = contact.bodyB
+        if body1 == brick
+        {
+            
+        }
      //function to call constantly to check if the ball's position is currently at a brick's position.
         /*for br in bricks
         {
@@ -102,6 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //does not slow down over time
         ball.physicsBody?.linearDamping = 0
         ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
+        ball.physicsBody?.categoryBitMask = BallCategory
         addChild(ball) //add ball to the view
     }
     
@@ -111,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle.name = "paddle"
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
         paddle.physicsBody?.isDynamic = false
+        paddle.physicsBody?.categoryBitMask = PaddleCategory
         addChild(paddle)
     }
     
@@ -120,6 +135,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         brick.name = "brick"
         brick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
         brick.physicsBody?.isDynamic = false
+        brick.physicsBody?.categoryBitMask = BlockCategory
         addChild(brick)
         bricks.append(brick)
     }
@@ -130,6 +146,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseZone.name = "loseZone"
         loseZone.physicsBody = SKPhysicsBody(rectangleOf: loseZone.size)
         loseZone.physicsBody?.isDynamic = false
+        loseZone.physicsBody?.categoryBitMask = BottomCategory
         addChild(loseZone)
     }
 
