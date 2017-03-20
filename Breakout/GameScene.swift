@@ -56,23 +56,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(button)
     }
     
-    func checkIfColliding(contact: SKPhysicsContact)
+    func checkGame()
+    {
+        if bricks.count == 0
+        {
+            //not displaying anything
+            var label = SKLabelNode()
+            label.position = CGPoint(x: frame.midX, y: frame.midY)
+            label.text = "Level Completed"
+            label.fontColor = UIColor.black
+            label.fontSize = 30
+            label.color = UIColor.white
+            addChild(label)
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact)
     {
         var body1 = SKPhysicsBody()
         var body2 = SKPhysicsBody()
         body1 = contact.bodyA
         body2 = contact.bodyB
-        if body1 == brick
+        var x = 0
+        for br in bricks
         {
             
+            if body1.categoryBitMask == BlockCategory || body2.categoryBitMask == BlockCategory
+            {
+                br.removeFromParent()
+                bricks.remove(at: x)
+                checkGame()
+            }
+                        x += 1
         }
-     //function to call constantly to check if the ball's position is currently at a brick's position.
-        /*for br in bricks
-        {
-            //add if statement to check if the ball is colliding with any of the bricks.
-            //if true, remove the brick(s) that are being collided with.
-            checkIfColliding()
-        }*/
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
