@@ -62,11 +62,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             //not displaying anything
             var label = SKLabelNode()
-            label.position = CGPoint(x: frame.midX, y: frame.midY)
+            label.position = CGPoint(x: frame.midX, y: 0)
             label.text = "Level Completed"
-            label.fontColor = UIColor.black
+            label.fontColor = UIColor.white
             label.fontSize = 30
-            label.color = UIColor.white
             addChild(label)
         }
     }
@@ -87,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bricks.remove(at: x)
                 checkGame()
             }
-                        x += 1
+            x += 1
         }
     }
     
@@ -165,5 +164,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseZone.physicsBody?.categoryBitMask = BottomCategory
         addChild(loseZone)
     }
-
+    
 }
