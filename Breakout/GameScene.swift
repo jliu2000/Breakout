@@ -70,6 +70,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ball.removeFromParent()
         }
     }
+    func resetGame()
+    {
+        self.removeAllChildren()
+        createButton()
+    }
     
     func didBegin(_ contact: SKPhysicsContact)
     {
@@ -101,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     label.fontColor = UIColor.white
                     label.fontSize = 30
                     addChild(label)
-                    ball.removeFromParent()
+                    resetGame()
 
                 }
             }
