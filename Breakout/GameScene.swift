@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var brick = SKSpriteNode()
     var button = SKSpriteNode()
     var bricks = [SKSpriteNode]()
+    var lives = 3
     
     let BallCategory   : UInt32 = 0x1 << 0
     let BottomCategory : UInt32 = 0x1 << 1
@@ -60,13 +61,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         if bricks.count == 0
         {
-            //not displaying anything
             var label = SKLabelNode()
             label.position = CGPoint(x: frame.midX, y: 0)
             label.text = "Level Completed"
             label.fontColor = UIColor.white
             label.fontSize = 30
             addChild(label)
+            ball.removeFromParent()
         }
     }
     
@@ -85,6 +86,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 br.removeFromParent()
                 bricks.remove(at: x)
                 checkGame()
+            }
+            if body1.categoryBitMask == BottomCategory || body2.categoryBitMask == BottomCategory
+            {
+                if lives > 1
+                {
+                    lives -= 1
+                }
+                else
+                {
+                    var label = SKLabelNode()
+                    label.position = CGPoint(x: frame.midX, y: 0)
+                    label.text = "You Lose"
+                    label.fontColor = UIColor.white
+                    label.fontSize = 30
+                    addChild(label)
+                    ball.removeFromParent()
+
+                }
             }
             x += 1
         }
