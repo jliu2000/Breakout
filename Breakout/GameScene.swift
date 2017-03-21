@@ -67,12 +67,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             label.fontColor = UIColor.white
             label.fontSize = 30
             addChild(label)
+            
             ball.removeFromParent()
         }
     }
     func resetGame()
     {
         self.removeAllChildren()
+        bricks.removeAll()
         createButton()
     }
     
@@ -97,6 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if lives > 1
                 {
                     lives -= 1
+                    resetGame()
                 }
                 else
                 {
