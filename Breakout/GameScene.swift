@@ -106,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bricks.remove(at: x)
                 checkGame()
                 score += 4
-                label.text = "Lives: \(lives) \t \t Score: \(score)"
+                label.text = "Lives: \(lives) \t Score: \(score)"
             }
             if body1.categoryBitMask == BottomCategory || body2.categoryBitMask == BottomCategory
             {
