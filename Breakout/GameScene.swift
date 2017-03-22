@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var button = SKSpriteNode()
     var bricks = [SKSpriteNode]()
     var lives = 3
+    var score = 0
     
     let BallCategory   : UInt32 = 0x1 << 0
     let BottomCategory : UInt32 = 0x1 << 1
@@ -39,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 makePaddle()
                 makeBrick()
                 makeLoseZone()
+                createInfoLabel()
                 physicsWorld.contactDelegate = self
                 self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
                 ball.physicsBody?.isDynamic = true
@@ -131,7 +133,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     {
-        
+        for touch in touches
+        {
+            var location = touch.location(in: self)
+            paddle.position.x = location.x
+        }
+    }
+    
+    func createInfoLabel()
+    {
+        var label = SKLabelNode()
+        label.position = CGPoint(x: frame.midX, y: frame.minY + 25)
+        label.fontSize = 20
+        label.fontColor = UIColor.black
+        label.text = "Lives: \(lives) \t Score: \(score)"
+        addChild(label)
     }
     
     func createBackground() {
