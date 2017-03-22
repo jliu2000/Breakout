@@ -23,7 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let BlockCategory  : UInt32 = 0x1 << 2
     let PaddleCategory : UInt32 = 0x1 << 3
     
-    override func didMove(to view: SKView) {
+    override func didMove(to view: SKView)
+    {
         createButton()
     }
     
@@ -150,7 +151,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(label)
     }
     
-    func createBackground() {
+    func createBackground()
+    {
         let stars = SKTexture(imageNamed: "stars")
         for i in 0...1 {
             let starsBackground = SKSpriteNode(texture: stars)
@@ -165,7 +167,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func makeBall() {
+    func makeBall()
+    {
         ball = SKShapeNode(circleOfRadius: 10)
         ball.position = CGPoint(x: frame.midX, y: frame.midY)
         ball.fillColor = UIColor.yellow
@@ -189,7 +192,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(ball) //add ball to the view
     }
     
-    func makePaddle() {
+    func makePaddle()
+    {
         paddle = SKSpriteNode(color: UIColor.white, size:CGSize(width: frame.width/4, height: frame.height/25))
         paddle.position = CGPoint(x: frame.midX, y: frame.minY + 125)
         paddle.name = "paddle"
@@ -199,7 +203,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(paddle)
     }
     
-    func makeBrick() {
+    func makeBrick()
+    {
         brick = SKSpriteNode(color: UIColor.blue, size: CGSize(width: frame.width/5, height: frame.height/25))
         brick.position = CGPoint(x: frame.midX, y: frame.maxY - 30)
         brick.name = "brick"
@@ -210,7 +215,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bricks.append(brick)
     }
     
-    func makeLoseZone() {
+    func makeLoseZone()
+    {
         let loseZone = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 50))
         loseZone.position = CGPoint(x: frame.midX, y:frame.minY + 25)
         loseZone.name = "loseZone"
