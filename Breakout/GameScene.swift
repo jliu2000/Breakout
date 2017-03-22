@@ -15,6 +15,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var brick = SKSpriteNode()
     var button = SKSpriteNode()
     var bricks = [SKSpriteNode]()
+    var label = SKLabelNode()
     var lives = 3
     var score = 0
     
@@ -22,6 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let BottomCategory : UInt32 = 0x1 << 1
     let BlockCategory  : UInt32 = 0x1 << 2
     let PaddleCategory : UInt32 = 0x1 << 3
+    
+    //create a lot more categories and change the paddle into an array of spriteNodes with each having a different bitmaskcategory, on collision change the impulse and direction of the ball based on what part of the paddle is hit.
     
     override func didMove(to view: SKView)
     {
@@ -52,6 +55,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if (node[0].name == "Reset Button")
             {
                 resetGame()
+                lives = 3
+                score = 0
             }
             paddle.position.x = location.x
         }
@@ -100,6 +105,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 br.removeFromParent()
                 bricks.remove(at: x)
                 checkGame()
+                score += 4
+                label.text = "Lives: \(lives) \t \t Score: \(score)"
             }
             if body1.categoryBitMask == BottomCategory || body2.categoryBitMask == BottomCategory
             {
@@ -143,9 +150,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func createInfoLabel()
     {
-        var label = SKLabelNode()
+        label = SKLabelNode()
         label.position = CGPoint(x: frame.midX, y: frame.minY + 25)
         label.fontSize = 20
+        label.name = "Info Label"
         label.fontColor = UIColor.black
         label.text = "Lives: \(lives) \t Score: \(score)"
         addChild(label)
