@@ -46,6 +46,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ball.physicsBody?.categoryBitMask = BallCategory
                 button.removeFromParent()
             }
+            else if (node[0].name == "Reset Button")
+            {
+                resetGame()
+            }
             paddle.position.x = location.x
         }
     }
@@ -103,13 +107,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 else
                 {
+                    self.removeAllChildren()
                     var label = SKLabelNode()
                     label.position = CGPoint(x: frame.midX, y: 0)
                     label.text = "You Lose"
                     label.fontColor = UIColor.white
                     label.fontSize = 30
                     addChild(label)
-                    resetGame()
+                    var reset = SKLabelNode()
+                    reset.position = CGPoint(x: frame.midX, y: frame.minY + 25)
+                    reset.text = "Restart"
+                    reset.fontColor = UIColor.white
+                    reset.fontSize = 30
+                    reset.name = "Reset Button"
+                    addChild(reset)
+                    
 
                 }
             }
