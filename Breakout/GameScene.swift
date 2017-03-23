@@ -100,6 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         {
             var label = SKLabelNode()
             label.position = CGPoint(x: frame.midX, y: 0)
+            label.fontSize = 15
             label.text = "Level Completed \nScore: \(score) \nLives Left: \(lives)"
             label.fontColor = UIColor.white
             label.fontSize = 30
@@ -129,8 +130,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             {
                 br.removeFromParent()
                 bricks.remove(at: x)
-                checkGame()
                 score += 4
+                checkGame()
                 label.text = "Lives: \(lives) \t Score: \(score)"
             }
             if body1.categoryBitMask == BottomCategory || body2.categoryBitMask == BottomCategory
