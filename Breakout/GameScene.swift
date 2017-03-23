@@ -59,10 +59,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 resetGame()
                 lives = 3
                 score = 0
+                level = 1
             }
             paddle.position.x = location.x
         }
     }
+    
+    func createGrid()
+    {
+        if level == 1
+        {
+            
+        }
+        else if level == 2
+        {
+            
+        }
+        else if level == 3
+        {
+            
+        }
+        else if level == 4
+        {
+            
+        }
+    }
+    
+    
     func createButton()
     {
         button = SKSpriteNode(imageNamed: "startButton")
