@@ -9,7 +9,8 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate
+{
     var ball = SKShapeNode()
     var paddle = SKSpriteNode()
     var brick = SKSpriteNode()
@@ -18,6 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var label = SKLabelNode()
     var lives = 3
     var score = 0
+    var level = 1
     
     let BallCategory   : UInt32 = 0x1 << 0
     let BottomCategory : UInt32 = 0x1 << 1
