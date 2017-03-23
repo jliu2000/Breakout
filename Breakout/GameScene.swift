@@ -2,8 +2,8 @@
 //  GameScene.swift
 //  Breakout
 //
-//  Created by jliu on 3/13/17.
-//  Copyright © 2017 Jason Liu. All rights reserved.
+//  Created by balgard & jliu on 3/13/17.
+//  Copyright © 2017 Brendan Algard & Jason Liu. All rights reserved.
 //
 
 import SpriteKit
@@ -75,7 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             var label = SKLabelNode()
             label.position = CGPoint(x: frame.midX, y: 0)
-            label.text = "Level Completed"
+            label.text = "Level Completed \nScore: \(score) \nLives Left: \(lives)"
             label.fontColor = UIColor.white
             label.fontSize = 30
             addChild(label)
@@ -118,12 +118,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 else
                 {
                     self.removeAllChildren()
-                    var label = SKLabelNode()
-                    label.position = CGPoint(x: frame.midX, y: 0)
-                    label.text = "You Lose"
-                    label.fontColor = UIColor.white
-                    label.fontSize = 30
-                    addChild(label)
+                    var loss = SKLabelNode()
+                    loss.position = CGPoint(x: frame.midX, y: 0)
+                    loss.text = "You Lose \nScore: \(score)"
+                    loss.fontColor = UIColor.white
+                    loss.fontSize = 30
+                    addChild(loss)
                     var reset = SKLabelNode()
                     reset.position = CGPoint(x: frame.midX, y: frame.minY + 25)
                     reset.text = "Restart"
