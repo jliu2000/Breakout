@@ -69,7 +69,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         if level == 1
         {
-            
+            var x = bricks.count
+            while x < 4
+            {
+                var newBrick = SKSpriteNode()
+                newBrick.color = UIColor.blue
+                newBrick.size = CGSize(width: frame.width / 5, height: frame.height / 25)
+                var xValue = Int(newBrick.size.width) * x + 5
+                newBrick.position = CGPoint(x: frame.minX + CGFloat(xValue), y: frame.maxY - 30)
+                newBrick.name = "brick"
+                newBrick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
+                newBrick.physicsBody?.isDynamic = false
+                newBrick.physicsBody?.categoryBitMask = BlockCategory
+                addChild(newBrick)
+                bricks.append(newBrick)
+                x += 1
+            }
         }
         else if level == 2
         {
@@ -105,7 +120,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             label.fontColor = UIColor.white
             label.fontSize = 30
             addChild(label)
-            
+            level += 1
             ball.removeFromParent()
         }
     }
