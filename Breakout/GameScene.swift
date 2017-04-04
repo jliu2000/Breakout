@@ -63,9 +63,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             }
             else if (node[0].name == "Next Level")
             {
-                print("TEST")
-                print(level)
-                //createGrid()
+                createGrid()
+                resetGame()
             }
             paddle.position.x = location.x
         }
@@ -75,34 +74,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         if level == 1
         {
-            var x = bricks.count
-            while x < 4
-            {
-                var newBrick = SKSpriteNode()
-                newBrick.color = UIColor.blue
-                newBrick.size = CGSize(width: frame.width / 5, height: frame.height / 25)
-                var xValue = Int(newBrick.size.width) * x + 5
-                newBrick.position = CGPoint(x: frame.minX + CGFloat(xValue), y: frame.maxY - 30)
-                newBrick.name = "brick"
-                newBrick.physicsBody = SKPhysicsBody(rectangleOf: brick.size)
-                newBrick.physicsBody?.isDynamic = false
-                newBrick.physicsBody?.categoryBitMask = BlockCategory
-                addChild(newBrick)
-                bricks.append(newBrick)
-                x += 1
-            }
+            makeBrick()
         }
         else if level == 2
         {
-            
+            makeBrick()
         }
         else if level == 3
         {
-            
+            makeBrick()
         }
         else if level == 4
         {
-            
+            makeBrick()
         }
     }
     
@@ -122,9 +106,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             var label = SKLabelNode(fontNamed: "Avenir-Heavy")
             label.position = CGPoint(x: frame.midX, y: 0)
             label.fontSize = 20
-            if level < 3
+            if level < 4
             {
-            label.text = "Level Completed \nScore: \(score) \nLives Left: \(lives)"
+            label.text = "Level \(level) Completed \nScore: \(score) \nLives Left: \(lives)"
             }
             else
             {
@@ -134,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             addChild(label)
             level += 1
             ball.removeFromParent()
-            if level < 3
+            if level < 4
             {
             var newLevel = SKLabelNode(fontNamed: "Avenir-Heavy")
             newLevel.position = CGPoint(x: frame.midX, y: frame.midY + 50)
@@ -149,7 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 newLevel.position = CGPoint(x: frame.midX, y: frame.midY + 50)
                 newLevel.text = "Restart Game"
                 newLevel.fontColor = UIColor.gray
-                newLevel.name = "Restart Game"
+                newLevel.name = "Reset Button"
                 addChild(newLevel)
             }
         }
@@ -226,7 +210,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         label.fontSize = 20
         label.name = "Info Label"
         label.fontColor = UIColor.black
-        label.text = "Lives: \(lives) \t Score: \(score)"
+        label.text = "Lives: \(lives) \t Score: \(score) \t Level: \(level)"
         addChild(label)
     }
     
