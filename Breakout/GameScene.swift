@@ -61,6 +61,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 score = 0
                 level = 1
             }
+            else if (node[0].name == "Next Level")
+            {
+                print("TEST")
+                print(level)
+                //createGrid()
+            }
             paddle.position.x = location.x
         }
     }
@@ -113,15 +119,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         if bricks.count == 0
         {
-            var label = SKLabelNode()
+            var label = SKLabelNode(fontNamed: "Avenir-Heavy")
             label.position = CGPoint(x: frame.midX, y: 0)
-            label.fontSize = 15
+            label.fontSize = 20
+            if level < 3
+            {
             label.text = "Level Completed \nScore: \(score) \nLives Left: \(lives)"
+            }
+            else
+            {
+                label.text = "Congratulations Score: \(score)!"
+            }
             label.fontColor = UIColor.white
-            label.fontSize = 30
             addChild(label)
             level += 1
             ball.removeFromParent()
+            if level < 3
+            {
+            var newLevel = SKLabelNode(fontNamed: "Avenir-Heavy")
+            newLevel.position = CGPoint(x: frame.midX, y: frame.midY + 50)
+            newLevel.text = "Next Level"
+            newLevel.fontColor = UIColor.gray
+            newLevel.name = "Next Level"
+            addChild(newLevel)
+            }
+            else
+            {
+                var newLevel = SKLabelNode(fontNamed: "Avenir-Heavy")
+                newLevel.position = CGPoint(x: frame.midX, y: frame.midY + 50)
+                newLevel.text = "Restart Game"
+                newLevel.fontColor = UIColor.gray
+                newLevel.name = "Restart Game"
+                addChild(newLevel)
+            }
         }
     }
     func resetGame()
