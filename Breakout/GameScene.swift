@@ -173,13 +173,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 else
                 {
                     self.removeAllChildren()
-                    var loss = SKLabelNode()
+                    var loss = SKLabelNode(fontNamed: "Avenir-Heavy")
                     loss.position = CGPoint(x: frame.midX, y: 0)
                     loss.text = "You Lose \nScore: \(score)"
                     loss.fontColor = UIColor.white
                     loss.fontSize = 30
                     addChild(loss)
-                    var reset = SKLabelNode()
+                    var reset = SKLabelNode(fontNamed: "Avenir-Heavy")
                     reset.position = CGPoint(x: frame.midX, y: frame.minY + 25)
                     reset.text = "Restart"
                     reset.fontColor = UIColor.white
@@ -205,7 +205,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func createInfoLabel()
     {
-        label = SKLabelNode()
+        label = SKLabelNode(fontNamed: "Avenir-Heavy")
         label.position = CGPoint(x: frame.midX, y: frame.minY + 25)
         label.fontSize = 20
         label.name = "Info Label"
