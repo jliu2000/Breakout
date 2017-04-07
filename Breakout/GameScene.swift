@@ -75,18 +75,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         if level == 1
         {
             makeBrick()
+            ball.physicsBody?.applyForce(CGVector(dx: 0, dy: -5))
         }
         else if level == 2
         {
             makeBrick()
+            ball.physicsBody?.applyForce(CGVector(dx: 0, dy: -10))
         }
         else if level == 3
         {
             makeBrick()
+            ball.physicsBody?.applyForce(CGVector(dx: 0, dy: -20))
         }
         else if level == 4
         {
             makeBrick()
+            ball.speed = ball.speed + 150
         }
     }
     
